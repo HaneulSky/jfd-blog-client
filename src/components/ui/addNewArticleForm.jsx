@@ -130,7 +130,7 @@ const AddNewArticleForm = () => {
                         sx={{ width: 450 }}
                     />
                     <TextField
-                        label="Вставте ссылку на изображение"
+                        label="Вставьте ссылку на изображение"
                         type="url"
                         name="urlImage"
                         value={data.urlImage}
