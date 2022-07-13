@@ -1,4 +1,16 @@
-Вы можете посмотреть проект по [ссылке](https://haneulsky.github.io/my-blog/)
+# jfd-blog - Дипломный проект курсов [Junior Frontend Developer](https://vladilen.ru/) 
+
+
+Стэк - ReactJS, Redux, NodeJS, MongoDB, MaterialUI, Bootstrap.  
+
+Вы можете посмотреть проект по [ссылке](https://fanciful-meerkat-a0e71a.netlify.app/)
+
+Деплой выполнен с помощью Heroku (backend), Netlify (frontend)
+
+Backend проекта доступен по >>[Ссылке](https://github.com/HaneulSky/jfd-blog-backend)<<
+
+
+
 
 # Getting Started with Create React App
 
