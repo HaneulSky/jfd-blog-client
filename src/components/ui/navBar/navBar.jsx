@@ -14,6 +14,7 @@ const NavBar = () => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(getIsLoggedIn());
     const currentUser = useSelector(getCurrentUserData());
+    const buttonContainerClass = `${navBarStyles.linkContainer} ${navBarStyles.button}`;
     useEffect(() => {
         dispatch(loadUser());
     }, [isLoggedIn]);
@@ -47,12 +48,17 @@ const NavBar = () => {
                         </Typography>
 
                         <Link
-                            className={navBarStyles.linkContainer}
+                            className={buttonContainerClass}
                             to="/addArticle"
                         >
                             <Button className={navBarStyles.button} variant="contained" color="info">
                                 Добавить статью
                             </Button>
+                        </Link>
+                        <Link
+                            className={navBarStyles.iconButton}
+                            to="/addArticle"
+                        >
                             <AddCircleOutlineIcon className={navBarStyles.iconButton} />
                         </Link>
                     </>
@@ -62,7 +68,7 @@ const NavBar = () => {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, ml: 6 }}
+                        sx={{ flexGrow: 1 }}
                         className={navBarStyles.linkContainer}
                     >
                         <p

@@ -5,6 +5,7 @@
 }
 .button{
     display: inline-block;
+    margin-right: 15px;
 }
 .iconButton{
     display: none;
@@ -23,6 +24,7 @@
     }
     .button{
         display: none;
+        text-decoration: none;
     }
     .iconButton{
         display: inline-block;
