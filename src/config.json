@@ -1,4 +1,6 @@
 {
-    "apiEndpoint": "https://github.com/HaneulSky/jfd-blog-backend/api",
+    "apiEndpoint": "https://jfd-blog.herokuapp.com/api",
     "isFireBase": false
 }
+
+

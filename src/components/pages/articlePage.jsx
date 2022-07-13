@@ -28,10 +28,10 @@ const ArticlePage = ({ articleId }) => {
                     mb: 5
                 }}
             >
-                <ImageCard
+                { ArticleById.urlImage && <ImageCard
                     image={ArticleById.urlImage}
                     articleTitle={ArticleById.title}
-                ></ImageCard>
+                ></ImageCard>}
                 <div style={{ width: 60 + "%", marginLeft: 40 }}>
                     {currentUser._id.toString() ===
                         ArticleById.userId.toString() && (

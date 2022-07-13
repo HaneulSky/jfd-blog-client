@@ -8,7 +8,7 @@ import LogOut from "./layout/logOut";
 import AdminPage from "./components/pages/adminPage";
 import Articles from "./layout/articles";
 import ProtectedRoute from "./components/common/protectedRoute";
-import NavBar from "./components/ui/navBar";
+import NavBar from "./components/ui/navBar/navBar";
 
 function App() {
     console.log(window.outerHeight, window.outerWidth);

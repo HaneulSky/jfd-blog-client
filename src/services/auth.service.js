@@ -8,6 +8,7 @@ const httpAuth = axios.create({
     //     key: process.env.REACT_APP_FIREBASE_KEY
     // }
 });
+console.log(config.apiEndpoint);
 
 const authService = {
     register: async (payload) => {
