@@ -73,7 +73,7 @@ const LoginForm = () => {
                 "& > :not(style)": {
                     marginTop: 10,
                     marginBottom: 5,
-                    width: 500,
+                    width: 90 + "%",
                     height: 340,
                     border: 0.5,
                     borderColor: "lightblue",
@@ -104,9 +104,9 @@ const LoginForm = () => {
                     variant="standard"
                     sx={{ width: 450 }}
                 />
-                {loginError && <p className="text-danger">{loginError}</p>}
+                {loginError && <p className="text-danger" style={{ margin: 0 }}>{loginError}</p>}
                 <Button
-                    sx={{ marginTop: 3, width: 200, marginLeft: 18 }}
+                    sx={{ marginTop: 5 + "px", width: 200 }}
                     variant="outlined"
                     color="primary"
                     type="submit"

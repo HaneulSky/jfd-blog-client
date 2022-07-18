@@ -81,7 +81,7 @@ const RegisterForm = () => {
                 flexWrap: "wrap",
                 "& > :not(style)": {
                     marginTop: 10,
-                    width: 500,
+                    width: 90 + "%",
                     marginBottom: 5,
                     border: 0.5,
                     borderColor: "lightblue",
@@ -120,7 +120,7 @@ const RegisterForm = () => {
                     error={errors.name}
                 />
                 <Button
-                    sx={{ marginTop: 3, width: 200, marginLeft: 18 }}
+                    sx={{ marginTop: 3, width: 200, alignSelf: "center" }}
                     variant="outlined"
                     color="primary"
                     type="submit"

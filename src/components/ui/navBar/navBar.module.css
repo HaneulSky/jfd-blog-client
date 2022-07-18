@@ -17,7 +17,8 @@
         flex-wrap: wrap;
     }
     .link{
-        font-size: 0.8rem;
+        font-size: 1rem;
+        margin: 0;
     }
     .linkContainer{
         margin-right: 5px;
@@ -30,6 +31,7 @@
         display: inline-block;
         text-decoration: none;
         color: white;
+        margin-right: 10px;
     }
 
 }
