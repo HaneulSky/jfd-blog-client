@@ -124,7 +124,11 @@ export const getCurrentUserData = () => (state) => {
         ? state.user.entities.find((u) => u._id === state.user.auth.userId)
         : null;
 };
-// export const getCurrentUserData = () => (state) => state.user.entities;
+export const getUserById = (userId) => (state) => {
+    return state.user.entities
+        ? state.user.entities.find((u) => u._id === userId)
+        : null;
+};
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
 export const getDataStatus = () => (state) => state.user.dataLoaded;
 export const getCurrentUserId = () => (state) => state.user.auth.userId;

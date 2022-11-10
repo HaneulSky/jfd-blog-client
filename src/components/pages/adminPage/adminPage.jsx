@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useParams } from "react-router-dom";
-import { getCurrentUserData, loadUser, getIsLoggedIn } from "../../../store/user";
+import {
+    getCurrentUserData,
+    loadUser,
+    getIsLoggedIn
+} from "../../../store/user";
 import {
     getArticles,
     getArticlesLoadingStatus,
@@ -28,6 +32,10 @@ const AdminPage = () => {
     const isLoading = useSelector(getArticlesLoadingStatus());
 
     useEffect(() => {
+        document.title = "Мои статьи";
+    }, []);
+
+    useEffect(() => {
         dispatch(loadUser());
         dispatch(loadArticlesList());
     }, [isLoggedIn]);
@@ -49,56 +57,56 @@ const AdminPage = () => {
         return (
             <div className={adminPageStyles.container}>
                 {userArticles.map((article) => (
-                        <Typography
-                            gutterBottom
-                            variant="h5"
-                            component="div"
-                            key={article._id}
-                            sx={{
-                                width: 345,
-                                height: 130,
-                                bgcolor: backColor,
-                                marginBottom: 5,
-                                p: 1,
-                                position: "relative"
+                    <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        key={article._id}
+                        sx={{
+                            width: 345,
+                            height: 130,
+                            bgcolor: backColor,
+                            marginBottom: 5,
+                            p: 1,
+                            position: "relative"
+                        }}
+                    >
+                        <Link
+                            style={{
+                                color: "inherit",
+                                textDecoration: "none"
                             }}
+                            to={`/articles/${article._id}`}
                         >
-                            <Link
-                                style={{
-                                    color: "inherit",
-                                    textDecoration: "none"
-                                }}
-                                to={`/articles/${article._id}`}
-                            >
-                                {article.title}
-                            </Link>
-                            <IconButton
-                                aria-label="exit"
-                                style={{
-                                    position: "absolute",
-                                    bottom: 0,
-                                    right: 0,
-                                    color: "inherit"
-                                }}
-                                onClick={() => handleRemoveArticle(article._id)}
-                            >
-                                <HighlightOffIcon />
-                            </IconButton>
+                            {article.title}
+                        </Link>
+                        <IconButton
+                            aria-label="exit"
+                            style={{
+                                position: "absolute",
+                                bottom: 0,
+                                right: 0,
+                                color: "inherit"
+                            }}
+                            onClick={() => handleRemoveArticle(article._id)}
+                        >
+                            <HighlightOffIcon />
+                        </IconButton>
 
-                            <Link
-                                aria-label="exit"
-                                style={{
-                                    position: "absolute",
-                                    bottom: 5,
-                                    right: 35,
-                                    color: "inherit",
-                                    textDecoration: "none"
-                                }}
-                                to={`/articles/${article._id}/edit`}
-                            >
-                                <EditIcon />
-                            </Link>
-                        </Typography>
+                        <Link
+                            aria-label="exit"
+                            style={{
+                                position: "absolute",
+                                bottom: 5,
+                                right: 35,
+                                color: "inherit",
+                                textDecoration: "none"
+                            }}
+                            to={`/articles/${article._id}/edit`}
+                        >
+                            <EditIcon />
+                        </Link>
+                    </Typography>
                 ))}
             </div>
         );

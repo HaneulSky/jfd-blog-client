@@ -1,3 +1,6 @@
+// чтобы запустить проект локально на фронтенде поменять:
+// в конфиге значение "apiEndpoint" на "http://localhost:8080/api"
+// при деплое поменять обратно на "https://jfd-blog.herokuapp.com/api"
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import Main from "./layout/main";
@@ -11,7 +14,6 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import NavBar from "./components/ui/navBar/navBar";
 
 function App() {
-    console.log(window.outerHeight, window.outerWidth);
     return (
         <>
             <NavBar />

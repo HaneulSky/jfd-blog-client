@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
-import Article from "../ui/article";
+import Article from "../../ui/articleCard/article";
 // import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { getArticles, loadArticlesList } from "../../store/articles";
+import { getArticles, loadArticlesList } from "../../../store/articles";
 import { LinearProgress } from "@mui/material";
-import { paginate } from "../../utils/paginate";
-import Pagination from "../common/Pagination";
-import PaginationProvider from "../../hooks/usePagination";
+import { paginate } from "../../../utils/paginate";
+import Pagination from "../../common/Pagination";
+import PaginationProvider from "../../../hooks/usePagination";
+import style from "./articlesListPage.module.css";
 
 const ArticlesListPage = () => {
     const dispatch = useDispatch();
     const articles = useSelector(getArticles());
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 4;
+    const pageSize = 8;
 
     useEffect(() => {
         dispatch(loadArticlesList());
+    }, []);
+
+    useEffect(() => {
+        document.title = "Главная myBlog";
     }, []);
 
     const handlePageChange = (pageIndex) => {
@@ -30,10 +35,7 @@ const ArticlesListPage = () => {
 
     return (
         <>
-            <div
-                className="d-flex justify-content-evenly flex-wrap"
-                style={{ marginTop: 15, marginBottom: 15 }}
-            >
+            <div className={style.container}>
                 {articles &&
                     articlesCrop.map((article) => (
                         <Article key={article._id} {...article} />

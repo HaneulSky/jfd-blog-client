@@ -20,6 +20,9 @@ const EditArticlePage = () => {
             ...ArticleById
         });
     }, []);
+    useEffect(() => {
+        document.title = "Редактирование статьи";
+    }, []);
 
     const params = useParams();
     const { articleId } = params;

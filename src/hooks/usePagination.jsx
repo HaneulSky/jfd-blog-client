@@ -13,7 +13,7 @@ export const usePagination = () => {
 const PaginationProvider = ({ children }) => {
     const articles = useSelector(getArticles());
     const dispatch = useDispatch();
-    const pageSize = 4;
+    const pageSize = 8;
 
     useEffect(() => {
         dispatch(loadArticlesList());

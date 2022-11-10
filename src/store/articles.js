@@ -113,10 +113,8 @@ export const getArticlesLoadingStatus = () => (state) =>
     state.articles.isLoading;
 export const getArticlesByIds = (artId) => (state) => {
     if (state.articles.entities) {
-        return state.articles.entities.find(
-            (a) => a._id === artId
-        );
-    };
+        return state.articles.entities.find((a) => a._id === artId);
+    }
 };
 
 export default articlesReducer;

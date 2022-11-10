@@ -4,63 +4,105 @@ import { getCurrentUserData } from "../../../store/user";
 import { useSelector, useDispatch } from "react-redux";
 import { Box, LinearProgress, Button } from "@mui/material";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 import ImageCard from "../../common/imageCard/imageCard";
 import styles from "./articlePage.module.css";
+import Comments from "../../ui/comments/comments";
 
 const ArticlePage = ({ articleId }) => {
     const dispatch = useDispatch();
     const ArticleById = useSelector(getArticlesByIds(articleId));
     const currentUser = useSelector(getCurrentUserData());
+    const history = useHistory();
+    const pageTitle = ArticleById ? ArticleById.title : "Loading...";
 
     useEffect(() => {
         dispatch(loadArticlesList());
     }, []);
+    useEffect(() => {
+        document.title = pageTitle;
+    }, [ArticleById]);
+
+    const dateConverter = (date) => {
+        return date.slice(0, 10);
+    };
 
     if (ArticleById) {
         return (
-            <Box
-                elevation={3}
-                className={styles.container}
-            >
-                {currentUser._id.toString() ===
-                    ArticleById.userId.toString() && (
-                        <Link to={`/articles/${articleId}/edit`} className={styles.editButton}>
-                            <Button variant="contained">Редактировать</Button>
-                        </Link>
-                    )}
-                {currentUser._id.toString() ===
-                    ArticleById.userId.toString() && (
-                    <Link to={`/articles/${articleId}/edit`} className={styles.editButtonIcon}>
-                      <BorderColorRoundedIcon />
-                    </Link>
-                    )}
-                <div>
-                    { ArticleById.urlImage && <ImageCard
-                        image={ArticleById.urlImage}
-                        articleTitle={ArticleById.title}
-                    ></ImageCard>}
-                </div>
-                <div className={styles.articleContainer}>
-                    <h2 className={styles.title}>
-                        {ArticleById.title}
-                    </h2>
-
-                    <p className={styles.text}>
-                        {ArticleById.content}
-                    </p>
-                    {ArticleById.link ? (
+            <>
+                <Box elevation={3} className={styles.container}>
+                    <div className={styles.buttons}>
+                        {currentUser._id.toString() ===
+                            ArticleById.userId.toString() && (
+                            <Link
+                                to={`/articles/${articleId}/edit`}
+                                className={`${styles.button} ${styles.editButton}`}
+                            >
+                                <Button variant="contained">
+                                    Редактировать
+                                </Button>
+                            </Link>
+                        )}
                         <Button
-                            className={styles.buttonToSource}
-                            href={ArticleById.link}
-                            variant="outlined"
+                            variant="contained"
+                            className={styles.button}
+                            onClick={() => history.goBack()}
                         >
-                            Источник
+                            {" "}
+                            <ArrowBackIosNewIcon />
+                            Назад
                         </Button>
-                    ) : null}
+                    </div>
+                    <div className={styles.buttonIcon}>
+                        <Button
+                            variant="contained"
+                            className={styles.button}
+                            onClick={() => history.goBack()}
+                        >
+                            {" "}
+                            <ArrowBackIosNewIcon />
+                        </Button>
+                        {currentUser._id.toString() ===
+                            ArticleById.userId.toString() && (
+                            <Link to={`/articles/${articleId}/edit`}>
+                                <BorderColorRoundedIcon />
+                            </Link>
+                        )}
+                    </div>
+                    <div>
+                        {ArticleById.urlImage && (
+                            <ImageCard
+                                image={ArticleById.urlImage}
+                                articleTitle={ArticleById.title}
+                            ></ImageCard>
+                        )}
+                    </div>
+                    <div className={styles.articleContainer}>
+                        <h2 className={styles.title}>{ArticleById.title}</h2>
+
+                        <p className={styles.text}>{ArticleById.content}</p>
+                        {ArticleById.link ? (
+                            <Button
+                                className={styles.buttonToSource}
+                                href={ArticleById.link}
+                                variant="outlined"
+                            >
+                                Источник
+                            </Button>
+                        ) : null}
+                        <p className={styles.date}>
+                            Дата публикации:{" "}
+                            {dateConverter(ArticleById.created_at)}
+                        </p>
+                    </div>
+                </Box>
+                <div>
+                    <Comments />
                 </div>
-            </Box>
+            </>
         );
     } else {
         return <LinearProgress sx={{ mt: 6 }} color="info" />;

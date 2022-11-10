@@ -7,7 +7,6 @@ import ArticlesLoader from "../components/ui/hoc/articlesLoader";
 
 const Articles = () => {
     const params = useParams();
-    console.log(params);
     const { articleId, edit } = params;
 
     return (
