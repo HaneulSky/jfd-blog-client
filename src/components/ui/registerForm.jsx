@@ -4,11 +4,12 @@ import TextField from "../common/textField";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import { validator } from "../../utils/validator";
-import { useDispatch } from "react-redux";
-import { signUp } from "../../store/user";
+import { useDispatch, useSelector } from "react-redux";
+import { signUp, getAuthErrors } from "../../store/user";
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
+    const signUpError = useSelector(getAuthErrors());
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -119,6 +120,11 @@ const RegisterForm = () => {
                     onChange={handleChange}
                     error={errors.name}
                 />
+                {signUpError && (
+                    <p className="text-danger" style={{ margin: 0 }}>
+                        {signUpError}
+                    </p>
+                )}
                 <Button
                     sx={{ marginTop: 3, width: 200, alignSelf: "center" }}
                     variant="outlined"

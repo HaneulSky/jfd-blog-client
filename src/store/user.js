@@ -94,6 +94,7 @@ export const login =
             if (code === 400) {
                 const errorMessage = generateAuthError(message);
                 dispatch(authRequestFailed(errorMessage));
+                console.log(message);
             } else {
                 dispatch(authRequestFailed(error.message));
             }
@@ -108,7 +109,14 @@ export const signUp = (payload) => async (dispatch) => {
         dispatch(authRequestSuccess({ userId: data.userId }));
         history.push("/");
     } catch (error) {
-        dispatch(authRequestFailed(error.message));
+        const { code, message } = error.response.data.error;
+        if (code === 400) {
+            const errorMessage = generateAuthError(message);
+            dispatch(authRequestFailed(errorMessage));
+            console.log(errorMessage);
+        } else {
+            dispatch(authRequestFailed(error.message));
+        }
     }
 };
 
