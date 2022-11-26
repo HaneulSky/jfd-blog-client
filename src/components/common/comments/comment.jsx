@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { getCurrentUserId, getUserById } from "../../../store/user";
 import { useSelector } from "react-redux";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import { formatDate } from "../../../utils/formatDate";
+import { formatDate, formatTime } from "../../../utils/formatDate";
 
 const Comment = ({
     content,
@@ -32,7 +32,10 @@ const Comment = ({
                     )}
                 </div>
                 <h6 className="card-subtitle mb-2 text-muted">
-                    <span className="small"> {formatDate(created)}</span>
+                    <span className="small">
+                        {" "}
+                        {formatDate(created)} в {formatTime(created)}
+                    </span>
                 </h6>
                 <p className="card-text">{content}</p>
             </div>

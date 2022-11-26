@@ -11,6 +11,7 @@ import { useHistory } from "react-router";
 import ImageCard from "../../common/imageCard/imageCard";
 import styles from "./articlePage.module.css";
 import Comments from "../../ui/comments/comments";
+import { formatDate } from "../../../utils/formatDate";
 
 const ArticlePage = ({ articleId }) => {
     const dispatch = useDispatch();
@@ -25,10 +26,6 @@ const ArticlePage = ({ articleId }) => {
     useEffect(() => {
         document.title = pageTitle;
     }, [ArticleById]);
-
-    const dateConverter = (date) => {
-        return date.slice(0, 10);
-    };
 
     if (ArticleById) {
         return (
@@ -89,13 +86,14 @@ const ArticlePage = ({ articleId }) => {
                                 className={styles.buttonToSource}
                                 href={ArticleById.link}
                                 variant="outlined"
+                                target="_blank"
                             >
                                 Источник
                             </Button>
                         ) : null}
                         <p className={styles.date}>
                             Дата публикации:{" "}
-                            {dateConverter(ArticleById.created_at)}
+                            {formatDate(ArticleById.created_at)}
                         </p>
                     </div>
                 </Box>
