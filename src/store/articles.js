@@ -56,13 +56,6 @@ const updateArticleRequested = createAction("articles/updateArticleRequested");
 const updateArticleFailed = createAction("articles/updateArticleFailed");
 const removeArticleRequested = createAction("articles/removeArticleRequested");
 
-// function isOutDated(date) {
-//     if (Date.now() - date > 10 * 60 * 1000) {
-//         return true;
-//     }
-//     return false;
-// }
-
 export const loadArticlesList = () => async (dispatch) => {
     dispatch(articlesRequested());
     try {

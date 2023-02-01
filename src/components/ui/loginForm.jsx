@@ -6,10 +6,12 @@ import TextField from "../common/textField";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthErrors, login } from "../../store/user";
+import Loader from "../common/loader";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const [isLoading, setLoading] = useState(false);
     const loginError = useSelector(getAuthErrors());
     const [data, setData] = useState({
         email: "",
@@ -34,6 +36,7 @@ const LoginForm = () => {
             min: { message: "Пароль должен быть не менее 8 символов", value: 8 }
         }
     };
+
     useEffect(() => {
         validate();
     }, [data]);
@@ -55,6 +58,7 @@ const LoginForm = () => {
             : "/";
 
         dispatch(login({ payload: data, redirect }));
+        setLoading(true);
     };
 
     const handleChange = (target) => {
@@ -66,56 +70,63 @@ const LoginForm = () => {
     const isValid = Object.keys(errors).length === 0;
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                "& > :not(style)": {
-                    marginTop: 10,
-                    marginBottom: 5,
-                    width: 90 + "%",
-                    height: 340,
-                    border: 0.5,
-                    borderColor: "lightblue",
-                    p: 3,
-                    boxShadow: 5
-                },
-                justifyContent: "center"
-            }}
-        >
-            <form style={{ marginTop: 10 }} onSubmit={handleSubmit}>
-                <TextField
-                    label="электронная почта"
-                    type="text"
-                    name="email"
-                    value={data.email}
-                    onChange={handleChange}
-                    error={errors.email}
-                    variant="standard"
-                    sx={{ width: 450 }}
-                />
-                <TextField
-                    label="Пароль"
-                    type="password"
-                    name="password"
-                    value={data.password}
-                    onChange={handleChange}
-                    error={errors.password}
-                    variant="standard"
-                    sx={{ width: 450 }}
-                />
-                {loginError && <p className="text-danger" style={{ margin: 0 }}>{loginError}</p>}
-                <Button
-                    sx={{ marginTop: 5 + "px", width: 200 }}
-                    variant="outlined"
-                    color="primary"
-                    type="submit"
-                    disabled={!isValid}
-                >
-                    Войти
-                </Button>
-            </form>
-        </Box>
+        <>
+            {isLoading && <Loader />}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    "& > :not(style)": {
+                        marginTop: 10,
+                        marginBottom: 5,
+                        width: 90 + "%",
+                        height: 340,
+                        border: 0.5,
+                        borderColor: "lightblue",
+                        p: 3,
+                        boxShadow: 5
+                    },
+                    justifyContent: "center"
+                }}
+            >
+                <form style={{ marginTop: 10 }} onSubmit={handleSubmit}>
+                    <TextField
+                        label="электронная почта"
+                        type="text"
+                        name="email"
+                        value={data.email}
+                        onChange={handleChange}
+                        error={errors.email}
+                        variant="standard"
+                        sx={{ width: 450 }}
+                    />
+                    <TextField
+                        label="Пароль"
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        onChange={handleChange}
+                        error={errors.password}
+                        variant="standard"
+                        sx={{ width: 450 }}
+                    />
+                    {loginError && (
+                        <p className="text-danger" style={{ margin: 0 }}>
+                            {loginError}
+                        </p>
+                    )}
+                    <Button
+                        sx={{ marginTop: 5 + "px", width: 200 }}
+                        variant="outlined"
+                        color="primary"
+                        type="submit"
+                        disabled={!isValid}
+                    >
+                        Войти
+                    </Button>
+                </form>
+            </Box>
+        </>
     );
 };
 

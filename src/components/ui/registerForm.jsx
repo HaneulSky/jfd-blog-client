@@ -6,10 +6,12 @@ import { Button } from "@mui/material";
 import { validator } from "../../utils/validator";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp, getAuthErrors } from "../../store/user";
+import Loader from "../common/loader";
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
     const signUpError = useSelector(getAuthErrors());
+    const [isLoading, setLoading] = useState(false);
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -73,69 +75,73 @@ const RegisterForm = () => {
             ...data
         };
         dispatch(signUp(newData));
+        setLoading(true);
     };
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                "& > :not(style)": {
-                    marginTop: 10,
-                    width: 90 + "%",
-                    marginBottom: 5,
-                    border: 0.5,
-                    borderColor: "lightblue",
-                    p: 3,
-                    boxShadow: 5
-                },
-                justifyContent: "center"
-            }}
-        >
-            <form style={{ marginTop: 10 }} onSubmit={handleSubmit}>
-                <TextField
-                    label="электронная почта"
-                    type="text"
-                    name="email"
-                    value={data.email}
-                    onChange={handleChange}
-                    error={errors.email}
-                    variant="standard"
-                    sx={{ width: 450 }}
-                />
-                <TextField
-                    label="Пароль"
-                    type="password"
-                    name="password"
-                    value={data.password}
-                    onChange={handleChange}
-                    error={errors.password}
-                    variant="standard"
-                    sx={{ width: 450 }}
-                />
-                <TextField
-                    label="Имя"
-                    name="name"
-                    value={data.name}
-                    onChange={handleChange}
-                    error={errors.name}
-                />
-                {signUpError && (
-                    <p className="text-danger" style={{ margin: 0 }}>
-                        {signUpError}
-                    </p>
-                )}
-                <Button
-                    sx={{ marginTop: 3, width: 200, alignSelf: "center" }}
-                    variant="outlined"
-                    color="primary"
-                    type="submit"
-                    disabled={!isValid}
-                >
-                    Зарегистрироваться
-                </Button>
-            </form>
-        </Box>
+        <>
+            {isLoading && <Loader />}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    "& > :not(style)": {
+                        marginTop: 10,
+                        width: 90 + "%",
+                        marginBottom: 5,
+                        border: 0.5,
+                        borderColor: "lightblue",
+                        p: 3,
+                        boxShadow: 5
+                    },
+                    justifyContent: "center"
+                }}
+            >
+                <form style={{ marginTop: 10 }} onSubmit={handleSubmit}>
+                    <TextField
+                        label="электронная почта"
+                        type="text"
+                        name="email"
+                        value={data.email}
+                        onChange={handleChange}
+                        error={errors.email}
+                        variant="standard"
+                        sx={{ width: 450 }}
+                    />
+                    <TextField
+                        label="Пароль"
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        onChange={handleChange}
+                        error={errors.password}
+                        variant="standard"
+                        sx={{ width: 450 }}
+                    />
+                    <TextField
+                        label="Имя"
+                        name="name"
+                        value={data.name}
+                        onChange={handleChange}
+                        error={errors.name}
+                    />
+                    {signUpError && (
+                        <p className="text-danger" style={{ margin: 0 }}>
+                            {signUpError}
+                        </p>
+                    )}
+                    <Button
+                        sx={{ marginTop: 3, width: 200, alignSelf: "center" }}
+                        variant="outlined"
+                        color="primary"
+                        type="submit"
+                        disabled={!isValid}
+                    >
+                        Зарегистрироваться
+                    </Button>
+                </form>
+            </Box>
+        </>
     );
 };
 
