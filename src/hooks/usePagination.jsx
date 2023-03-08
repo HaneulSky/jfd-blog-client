@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import _ from "lodash";
-import { getArticles, loadArticlesList } from "../store/articles";
+import { loadArticlesList } from "../store/articles";
 
 const PaginationContext = React.createContext();
 
@@ -10,8 +10,7 @@ export const usePagination = () => {
     return useContext(PaginationContext);
 };
 
-const PaginationProvider = ({ children }) => {
-    const articles = useSelector(getArticles());
+const PaginationProvider = ({ children, count }) => {
     const dispatch = useDispatch();
     const pageSize = 8;
 
@@ -19,9 +18,7 @@ const PaginationProvider = ({ children }) => {
         dispatch(loadArticlesList());
     }, []);
 
-    const itemsCount = articles ? articles.length : null;
-
-    const pageCount = Math.ceil(itemsCount / pageSize);
+    const pageCount = Math.ceil(count / pageSize);
     if (pageCount === 1) return null;
 
     const pages = _.range(1, pageCount + 1);
@@ -37,7 +34,8 @@ PaginationProvider.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
-    ])
+    ]),
+    count: PropTypes.number
 };
 
 export default PaginationProvider;
