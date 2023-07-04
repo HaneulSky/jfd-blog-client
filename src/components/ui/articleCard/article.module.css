@@ -1,0 +1,9 @@
+.openLink {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+}
+.articleCard {
+    position: relative;
+    background-color: lightgoldenrodyellow;
+}

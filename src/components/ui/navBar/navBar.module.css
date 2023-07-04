@@ -1,0 +1,55 @@
+.link{
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.button{
+    display: inline-block;
+    margin-right: 15px;
+}
+.iconButton{
+    display: none;
+}
+
+@media screen and (max-width: 700px){
+    .navBar{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .link{
+        font-size: 1rem;
+        margin: 0;
+    }
+    .linkContainer{
+        margin-right: 5px;
+    }
+    .button{
+        display: none;
+        text-decoration: none;
+    }
+    .iconButton{
+        display: inline-block;
+        text-decoration: none;
+        color: white;
+        margin-right: 10px;
+    }
+
+}
+
+@media screen and (max-width: 450px) {
+    .link{
+        font-size: 1rem;
+    }
+    .linkContainer{
+        width: 100%;
+        margin: 5px 0;
+        border-bottom: 1px dashed white;
+    }
+    .button{
+        display: inline-block;
+        font-size: 0.8rem;
+    }
+    .iconButton{
+        display: none;
+    }
+}
