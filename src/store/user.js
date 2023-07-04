@@ -90,7 +90,6 @@ export const login =
             dispatch(authRequestSuccess({ userId: data.userId }));
             history.push(redirect);
         } catch (error) {
-            console.log("error", error);
             const { code, message } = error.response?.data.error;
             if (code === 400) {
                 const errorMessage = generateAuthError(message);
@@ -110,7 +109,6 @@ export const signUp = (payload) => async (dispatch) => {
         dispatch(authRequestSuccess({ userId: data.userId }));
         history.push("/");
     } catch (error) {
-        console.log("error", error);
         const { code, message } = error.response.data.error;
         if (code === 400) {
             const errorMessage = generateAuthError(message);
